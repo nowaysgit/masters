@@ -37,7 +37,7 @@ export default defineComponent({
   },
   setup() {
     const settings = {
-      apiKey: "9864223d-351b-44d1-a371-55aa57688887",
+      apiKey: process.env.YANDEX_APIKEY,
       lang: "ru_RU",
       coordorder: "latlong",
       enterprise: false,
