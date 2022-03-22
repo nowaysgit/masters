@@ -8,52 +8,42 @@
   ></yandex-map>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
+import { defineProps, PropType, ref } from "vue";
 import { yandexMap } from "vue-yandex-maps";
+const map = ref();
 
-export default defineComponent({
-  name: "YandexMapMasters",
-  components: { yandexMap },
-  props: {
-    controls: {
-      type: Object,
-      default() {
-        return {
-          trafficControl: { float: "right" },
-          geolocationControl: { float: "right" },
-          zoomControl: { float: "right", position: { right: 10, top: 200 } },
-          typeSelector: { float: "right" },
-          fullscreenControl: { float: "right", position: { top: -100 } },
-        };
-      },
-    },
-    coords: {
-      type: Array as PropType<Array<number>>,
-      default() {
-        return [52.289588, 104.280606];
-      },
+defineProps({
+  controls: {
+    type: Object,
+    default() {
+      return {
+        trafficControl: { float: "right" },
+        geolocationControl: { float: "right" },
+        zoomControl: { float: "right", position: { right: 10, top: 200 } },
+        typeSelector: { float: "right" },
+        fullscreenControl: { float: "right", position: { top: -100 } },
+      };
     },
   },
-  setup() {
-    const settings = {
-      apiKey: process.env.YANDEX_APIKEY,
-      lang: "ru_RU",
-      coordorder: "latlong",
-      enterprise: false,
-      version: "2.1",
-    };
-    return {
-      settings,
-    };
-  },
-  methods: {
-    ready() {
-      const map = this.$refs.map;
-      console.log(map);
+  coords: {
+    type: Array as PropType<Array<number>>,
+    default() {
+      return [52.289588, 104.280606];
     },
   },
 });
+const settings = ref({
+  apiKey: process.env.YANDEX_APIKEY,
+  lang: "ru_RU",
+  coordorder: "latlong",
+  enterprise: false,
+  version: "2.1",
+});
+
+const ready = () => {
+  console.log(map);
+};
 </script>
 
 <style scoped lang="scss">
