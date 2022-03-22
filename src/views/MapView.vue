@@ -1,22 +1,16 @@
 <template>
   <div class="map">
     <YandexMapMasters />
-    <ApplicationPanel />
+    <BottomSheet title="Активная заявка">
+      <ActiveApplication></ActiveApplication>
+    </BottomSheet>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import YandexMapMasters from "@/components/YandexMapMasters.vue";
-import ApplicationPanel from "@/components/ApplicationPanel.vue";
-
-export default defineComponent({
-  name: "HomeView",
-  components: {
-    YandexMapMasters,
-    ApplicationPanel,
-  },
-});
+import BottomSheet from "@/components/BottomSheet.vue";
+import ActiveApplication from "@/components/ActiveApplication.vue";
 </script>
 
 <style scoped lang="scss">

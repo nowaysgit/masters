@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/styles/variables";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -29,6 +29,6 @@ a {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
-  background-color: $tabBar;
+  background-color: black;
 }
 </style>

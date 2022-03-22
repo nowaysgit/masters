@@ -57,8 +57,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/variables";
-
 .ymap-container {
   width: 100%;
   height: 100%;

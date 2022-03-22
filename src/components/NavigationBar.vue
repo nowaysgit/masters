@@ -28,7 +28,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/variables";
+@import "@/styles/fonts";
+@import "@/styles/colors";
 .container {
   z-index: 5;
   position: fixed;
@@ -44,6 +45,10 @@ export default {
     padding-left: 12px;
     padding-right: 12px;
   }
+  @media (min-width: 365px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 
   background: $tabBar;
   box-shadow: 0px -0.5px 0px rgba(255, 255, 255, 0.12);
@@ -55,7 +60,7 @@ export default {
     @media (min-width: 328px) {
       justify-content: space-between;
     }
-    @media (min-width: 390px) {
+    @media (min-width: 365px) {
       justify-content: space-evenly;
     }
     display: flex;
