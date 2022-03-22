@@ -7,7 +7,7 @@
     </div>
     <div style="margin-bottom: 70px"></div>
     <slot></slot>
-    <div style="margin-top: 80px"></div>
+    <div style="margin-top: 230px"></div>
   </div>
 </template>
 

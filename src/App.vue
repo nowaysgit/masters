@@ -3,15 +3,8 @@
   <NavigationBar />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import NavigationBar from "@/components/NavigationBar.vue";
-
-export default {
-  name: "App",
-  components: {
-    NavigationBar,
-  },
-};
 </script>
 
 <style lang="scss">
@@ -24,7 +17,7 @@ a {
   text-decoration: none;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

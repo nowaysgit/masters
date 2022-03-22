@@ -21,12 +21,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "NavigationBar",
-};
-</script>
-
 <style lang="scss" scoped>
 @import "@/styles/fonts";
 @import "@/styles/colors";
