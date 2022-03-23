@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import ActiveApplication from "@/components/ActiveApplication.vue";
+import ActiveApplication from "@/components/Applications/ActiveApplication.vue";
 import BaseSheet from "@/components/UI/BaseSheet.vue";
 import FullBackground from "@/components/UI/FullBackground";
 import { ref } from "vue";

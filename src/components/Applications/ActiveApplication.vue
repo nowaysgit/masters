@@ -62,8 +62,8 @@
 </template>
 
 <script setup lang="ts">
-import TaskTab from "@/components/UI/TaskTab.vue";
-import InfoTab from "@/components/UI/InfoTab.vue";
+import TaskTab from "@/components/Tabs/TaskTab.vue";
+import InfoTab from "@/components/Tabs/InfoTab.vue";
 import DropdownMenu from "@/components/UI/DropdownMenu.vue";
 import { Color, Size, Font } from "@/models/UI/Enums";
 </script>
@@ -78,7 +78,6 @@ import { Color, Size, Font } from "@/models/UI/Enums";
     padding-left: 16px;
     padding-right: 16px;
   }
-
   .resized {
     display: flex;
     justify-content: space-evenly;
@@ -93,11 +92,9 @@ import { Color, Size, Font } from "@/models/UI/Enums";
       justify-content: space-between;
     }
   }
-
   .column {
     flex-direction: column;
   }
-
   .row {
     margin-top: 12px;
     display: flex;

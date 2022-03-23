@@ -42,7 +42,6 @@ const { panelStartTouch, panelEndTouch } = useLeaving(sheet, background);
   top: calc(100vh - 150px);
   height: calc(100vh - 52px);
 }
-
 .header {
   z-index: 3;
   position: fixed;
@@ -67,7 +66,6 @@ const { panelStartTouch, panelEndTouch } = useLeaving(sheet, background);
     -webkit-border-radius: 20.5px;
     -moz-border-radius: 2.5px;
   }
-
   .title {
     @extend %largeTitle;
     text-align: left;

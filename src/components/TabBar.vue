@@ -31,6 +31,10 @@
   left: 0;
   right: 0;
   height: 80px;
+  background: $tabBarBackground;
+  box-shadow: 0px -0.5px 0px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+
   @media (max-width: 327px) {
     padding-left: 0;
     padding-right: 0;
@@ -43,10 +47,6 @@
     padding-left: 0;
     padding-right: 0;
   }
-
-  background: $tabBarBackground;
-  box-shadow: 0px -0.5px 0px rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
   nav {
     @media (max-width: 327px) {
       justify-content: center;
@@ -71,11 +71,9 @@
         text-align: center;
         color: rgba(255, 255, 255, 0.32);
       }
-
       img {
         filter: brightness(32%);
       }
-
       &.router-link-active,
       &.router-link-exact-active {
         p {

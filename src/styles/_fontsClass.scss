@@ -1,0 +1,31 @@
+@import "@/styles/fonts";
+.captionRegular {
+  @extend %captionRegular;
+
+  text-align: left;
+  margin-bottom: 24px;
+  align-self: flex-start;
+  justify-self: flex-end;
+}
+.bodySemiBold {
+  @extend %bodySemiBold;
+
+  text-align: left;
+  align-self: flex-start;
+  justify-self: flex-end;
+}
+.bodyRegular {
+  @extend %bodyRegular;
+
+  text-align: left;
+  align-self: flex-start;
+  justify-self: flex-end;
+}
+.bodyMedium {
+  @extend %bodyMedium;
+
+  text-align: left;
+  max-width: 82px;
+  align-self: flex-start;
+  justify-self: flex-end;
+}

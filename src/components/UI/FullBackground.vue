@@ -11,7 +11,6 @@
   top: 0;
   min-height: 100vh;
   z-index: 1;
-
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.15s, opacity 0.15s linear;
