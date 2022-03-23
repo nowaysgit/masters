@@ -1,19 +1,28 @@
 <template>
-  <div ref="background" class="background"></div>
-  <div class="bottomSheet" ref="panel">
-    <div @touchstart="panelStartTouch" @touchend="panelEndTouch" class="header">
-      <div class="line"></div>
-      <h1 class="title">{{ title }}</h1>
-    </div>
-    <div style="margin-bottom: 70px"></div>
-    <slot></slot>
-    <div style="margin-top: 230px"></div>
-  </div>
+  <FullBackground ref="background" />
+  <BaseSheet ref="sheet" class="sheet">
+    <template v-slot:header>
+      <div
+        @touchstart="panelStartTouch"
+        @touchend="panelEndTouch"
+        class="header"
+      >
+        <div class="line"></div>
+        <h1 class="title">{{ title }}</h1>
+      </div>
+    </template>
+    <template v-slot:body>
+      <slot></slot>
+    </template>
+  </BaseSheet>
 </template>
 
 <script setup lang="ts">
 import { defineProps, ref } from "vue";
 import useLeaving from "@/hooks/Leaving";
+import BaseSheet from "@/components/UI/BaseSheet";
+import FullBackground from "@/components/UI/FullBackground";
+
 defineProps({
   title: {
     type: String,
@@ -21,74 +30,48 @@ defineProps({
     default: "BottomSheet",
   },
 });
-const panel = ref();
+const sheet = ref();
 const background = ref();
-const { panelStartTouch, panelEndTouch } = useLeaving(panel, background);
+const { panelStartTouch, panelEndTouch } = useLeaving(sheet, background);
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/fonts";
 @import "@/styles/colors";
-.background {
-  background-color: black;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  min-height: 100vh;
-  z-index: 1;
-
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.15s, opacity 0.15s linear;
+.sheet {
+  top: calc(100vh - 150px);
+  height: calc(100vh - 52px);
 }
 
-.bottomSheet {
-  z-index: 2;
+.header {
+  z-index: 3;
   position: fixed;
-  top: calc(100vh - 150px);
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  height: calc(100vh - 52px);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  transition: top 0.2s ease-out;
+  width: 100%;
+  padding-bottom: 20px;
 
   background-color: $bottomSheet;
   border-radius: 20px 20px 0px 0px;
 
-  .header {
-    z-index: 3;
-    position: fixed;
-    width: 100%;
-    padding-bottom: 20px;
+  .line {
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    width: 32px;
+    height: 5px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
 
-    background-color: $bottomSheet;
-    border-radius: 20px 20px 0px 0px;
+    opacity: 0.08;
 
-    .line {
-      margin-top: 7.5px;
-      margin-bottom: 7.5px;
-      width: 32px;
-      height: 5px;
-      background-color: white;
-      margin-left: auto;
-      margin-right: auto;
+    border-radius: 2.5px;
+    -webkit-border-radius: 20.5px;
+    -moz-border-radius: 2.5px;
+  }
 
-      opacity: 0.08;
-
-      border-radius: 2.5px;
-      -webkit-border-radius: 20.5px;
-      -moz-border-radius: 2.5px;
-    }
-
-    .title {
-      @extend %largeTitle;
-      text-align: left;
-      padding: 0 20px;
-    }
+  .title {
+    @extend %largeTitle;
+    text-align: left;
+    padding: 0 20px;
   }
 }
 </style>
