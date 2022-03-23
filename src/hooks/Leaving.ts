@@ -60,19 +60,23 @@ export default function useLeaving(
     handleGesture();
   };
 
+  const getHtml = (obg: any): HTMLElement => {
+    return (obg.value as any).$el ? (obg.value as any).$el : obg.value;
+  };
+
   watch(position, (currentValue) => {
     if (currentValue === 1) {
-      panel.value.style.top = "calc(100vh - 150px)";
-      background.value.style.visibility = "hidden";
-      background.value.style.opacity = "0";
+      getHtml(panel).style.top = "calc(100vh - 150px)";
+      getHtml(background).style.visibility = "hidden";
+      getHtml(background).style.opacity = "0";
     } else if (currentValue === 2) {
-      panel.value.style.top = "calc(100vh - 316px)";
-      background.value.style.visibility = "hidden";
-      background.value.style.opacity = "0";
+      getHtml(panel).style.top = "calc(100vh - 316px)";
+      getHtml(background).style.visibility = "hidden";
+      getHtml(background).style.opacity = "0";
     } else {
-      panel.value.style.top = "52px";
-      background.value.style.visibility = "visible";
-      background.value.style.opacity = "1";
+      getHtml(panel).style.top = "52px";
+      getHtml(background).style.visibility = "visible";
+      getHtml(background).style.opacity = "1";
     }
   });
 
