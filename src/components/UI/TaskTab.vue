@@ -1,6 +1,6 @@
 <template>
   <div ref="tabDiv" :class="['tab', color, size]" @click="action">
-    <p ref="nameDiv" class="name">{{ name }}</p>
+    <p ref="nameDiv" class="captionRegular">{{ name }}</p>
     <p :class="line1.font">{{ line1.text }}</p>
     <p :class="line2.font">{{ line2.text }}</p>
   </div>
@@ -80,30 +80,30 @@ useIconBackground(nameDiv, props.ico);
   display: flex;
   flex-direction: column;
 
-  .name {
-    @extend %nameTab;
+  .captionRegular {
+    @extend %captionRegular;
 
     text-align: left;
     margin-bottom: 24px;
     align-self: flex-start;
     justify-self: flex-end;
   }
-  .headlineSemiBold {
-    @extend %headlineSemiBold;
+  .bodySemiBold {
+    @extend %bodySemiBold;
 
     text-align: left;
     align-self: flex-start;
     justify-self: flex-end;
   }
-  .headLineRegular {
-    @extend %headLineRegular;
+  .bodyRegular {
+    @extend %bodyRegular;
 
     text-align: left;
     align-self: flex-start;
     justify-self: flex-end;
   }
-  .btnAction {
-    @extend %btnAction;
+  .bodyMedium {
+    @extend %bodyMedium;
 
     text-align: left;
     max-width: 82px;

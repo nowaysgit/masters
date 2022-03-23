@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown">
     <div @click="show" class="header">
-      <span class="title">{{ name }}</span>
+      <span class="title1">{{ name }}</span>
       <img :src="ico" class="img" />
     </div>
     <div
@@ -46,14 +46,13 @@ const show = () => {
     width: 100%;
     display: flex;
 
-    .title {
-      @extend %title;
+    .title1 {
+      @extend %title1;
       text-align: left;
       padding-left: 4px;
     }
     .img {
       padding-left: 2px;
-      padding-top: 4px;
       opacity: 0.32;
     }
   }

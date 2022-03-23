@@ -44,7 +44,7 @@
     padding-right: 0;
   }
 
-  background: $tabBar;
+  background: $tabBarBackground;
   box-shadow: 0px -0.5px 0px rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px);
   nav {
@@ -65,7 +65,7 @@
       padding-right: 12px;
 
       p {
-        @extend %tabBar;
+        @extend %footNote;
         min-width: 52px;
 
         text-align: center;

@@ -1,7 +1,6 @@
 <template>
   <div ref="tabDiv" :class="['tab', color]" @click="action">
-    <p ref="nameDiv" class="name">{{ name }}</p>
-    <p class="headLine1">{{ line1 }}</p>
+    <p class="bodyRegular">{{ text }}</p>
   </div>
 </template>
 
@@ -11,12 +10,7 @@ import useImageBackground from "@/hooks/ImageBackground";
 import { Color } from "@/models/UI/Enums";
 
 const props = defineProps({
-  name: {
-    type: String,
-    required: false,
-    default: "",
-  },
-  line1: {
+  text: {
     type: String,
     required: false,
     default: "",
@@ -29,7 +23,7 @@ const props = defineProps({
   color: {
     type: String as PropType<Color>,
     required: false,
-    default: Color.description,
+    default: Color.tabs,
   },
   action: {
     type: Function as PropType<(id: number) => void>,
@@ -37,7 +31,6 @@ const props = defineProps({
   },
 });
 const tabDiv = ref();
-const nameDiv = ref();
 useImageBackground(tabDiv, props.image);
 </script>
 
@@ -49,17 +42,10 @@ useImageBackground(tabDiv, props.image);
   border-radius: 16px;
   margin-bottom: 12px;
 
-  .name {
-    @extend %title2;
+  .bodyRegular {
+    @extend %bodyRegular;
 
     text-align: left;
-    margin-bottom: 12px;
-  }
-  .headLine1 {
-    @extend %bodyText;
-
-    text-align: left;
-    opacity: 0.5;
   }
 }
 </style>

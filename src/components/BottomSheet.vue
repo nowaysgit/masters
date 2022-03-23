@@ -1,6 +1,6 @@
 <template>
   <div ref="background" class="background"></div>
-  <div class="applicationPanel" ref="panel">
+  <div class="bottomSheet" ref="panel">
     <div @touchstart="panelStartTouch" @touchend="panelEndTouch" class="header">
       <div class="line"></div>
       <h1 class="title">{{ title }}</h1>
@@ -43,7 +43,7 @@ const { panelStartTouch, panelEndTouch } = useLeaving(panel, background);
   transition: visibility 0.15s, opacity 0.15s linear;
 }
 
-.applicationPanel {
+.bottomSheet {
   z-index: 2;
   position: fixed;
   top: calc(100vh - 150px);
@@ -56,7 +56,7 @@ const { panelStartTouch, panelEndTouch } = useLeaving(panel, background);
   overflow-x: hidden;
   transition: top 0.2s ease-out;
 
-  background-color: $grey70;
+  background-color: $bottomSheet;
   border-radius: 20px 20px 0px 0px;
 
   .header {
@@ -65,7 +65,7 @@ const { panelStartTouch, panelEndTouch } = useLeaving(panel, background);
     width: 100%;
     padding-bottom: 20px;
 
-    background-color: $grey70;
+    background-color: $bottomSheet;
     border-radius: 20px 20px 0px 0px;
 
     .line {

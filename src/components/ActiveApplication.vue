@@ -4,19 +4,19 @@
       <div class="resized">
         <TaskTab
           name="Время"
-          :line1="{ font: Font.headlineSemiBold, text: 'Сегодня,' }"
-          :line2="{ font: Font.headlineSemiBold, text: 'в&nbsp;15:30' }"
-          :color="Color.purpule"
+          :line1="{ font: Font.bodySemiBold, text: 'Сегодня,' }"
+          :line2="{ font: Font.bodySemiBold, text: 'в&nbsp;15:30' }"
+          :color="Color.tabs"
           :size="Size.small"
         />
         <TaskTab
           name="Адрес"
           :line1="{
-            font: Font.headlineSemiBold,
+            font: Font.bodySemiBold,
             text: 'ул. Байкальская, 250А',
           }"
-          :line2="{ font: Font.headlineSemiBold, text: '4 км • 9 мин' }"
-          :color="Color.grey40"
+          :line2="{ font: Font.bodySemiBold, text: '4 км • 9 мин' }"
+          :color="Color.tabs"
           :size="Size.large"
           image="map.png"
         />
@@ -26,15 +26,15 @@
       <div class="resized">
         <TaskTab
           name="Клиент"
-          :line1="{ font: Font.headlineSemiBold, text: 'Александр' }"
-          :line2="{ font: Font.headLineRegular, text: '+7 (983) 243-10-67' }"
-          :color="Color.green"
+          :line1="{ font: Font.bodySemiBold, text: 'Александр' }"
+          :line2="{ font: Font.bodyRegular, text: '+7 (983) 243-10-67' }"
+          :color="Color.tabs"
           :size="Size.large"
         />
         <TaskTab
           ico="phone.svg"
-          :line2="{ font: Font.btnAction, text: 'Позвонить клиенту' }"
-          :color="Color.grey40"
+          :line2="{ font: Font.bodyMedium, text: 'Позвонить клиенту' }"
+          :color="Color.tabs"
           :size="Size.small"
         />
       </div>
@@ -45,16 +45,13 @@
       <div class="resized column">
         <DropdownMenu name="Описание">
           <InfoTab
-            name="Не работает видеокарта"
-            line1="Майнилась, в один момент перестала определяться виндой. Не разбиралаcь."
+            text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
           />
           <InfoTab
-            name="Не работает видеокарта"
-            line1="Майнилась, в один момент перестала определяться виндой. Не разбиралаcь."
+            text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
           />
           <InfoTab
-            name="Не работает видеокарта"
-            line1="Майнилась, в один момент перестала определяться виндой. Не разбиралаcь."
+            text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
           />
         </DropdownMenu>
         <DropdownMenu name="Услуги"></DropdownMenu>

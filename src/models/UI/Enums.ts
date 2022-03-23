@@ -1,18 +1,16 @@
 export enum Color {
-  purpule = "purpule",
+  tabs = "tabs",
   green = "green",
-  grey40 = "grey40",
-  grey50 = "grey50",
-  grey60 = "grey60",
-  grey70 = "grey70",
-  description = "description",
+  blue = "blue",
+  red = "red",
 }
 export enum Size {
   large = "large",
   small = "small",
 }
 export enum Font {
-  headlineSemiBold = "headlineSemiBold",
-  headLineRegular = "headLineRegular",
-  btnAction = "btnAction",
+  captionRegular = "captionRegular",
+  bodySemiBold = "bodySemiBold",
+  bodyRegular = "bodyRegular",
+  bodyMedium = "bodyMedium",
 }

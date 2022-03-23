@@ -7,7 +7,7 @@ export default function useIconBackground(div: Ref<HTMLElement>, ico: string) {
       div.value.style.backgroundRepeat = `no-repeat`;
       div.value.style.minHeight = "24px";
       div.value.style.minWidth = "24px";
-      div.value.style.marginBottom = "16px";
+      div.value.style.marginBottom = "18px";
     }
   });
   return { hook };
