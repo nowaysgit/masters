@@ -1,10 +1,12 @@
 <template>
+  <YandexMapMasters />
   <router-view />
   <NavigationBar />
 </template>
 
 <script setup lang="ts">
 import NavigationBar from "@/components/NavigationBar.vue";
+import YandexMapMasters from "@/components/YandexMapMasters.vue";
 </script>
 
 <style lang="scss">

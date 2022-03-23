@@ -1,16 +1,15 @@
 <template>
-  <div class="map">
-    <YandexMapMasters />
-    <BottomSheet title="Активная заявка">
-      <ActiveApplication></ActiveApplication>
-    </BottomSheet>
-  </div>
+  <BottomSheet :title="title">
+    <ActiveApplication />
+  </BottomSheet>
 </template>
 
 <script setup lang="ts">
-import YandexMapMasters from "@/components/YandexMapMasters.vue";
-import BottomSheet from "@/components/BottomSheet.vue";
 import ActiveApplication from "@/components/ActiveApplication.vue";
+import BottomSheet from "@/components/BottomSheet.vue";
+import { ref } from "vue";
+
+const title = ref("Активная заявка");
 </script>
 
 <style scoped lang="scss">

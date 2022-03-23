@@ -1,11 +1,13 @@
 <template>
-  <yandex-map
-    @map-was-initialized="ready"
-    ref="map"
-    :coords="coords"
-    :settings="settings"
-    :detailed-controls="controls"
-  ></yandex-map>
+  <div class="map">
+    <yandex-map
+      @map-was-initialized="ready"
+      ref="map"
+      :coords="coords"
+      :settings="settings"
+      :detailed-controls="controls"
+    ></yandex-map>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -47,6 +49,10 @@ const ready = () => {
 </script>
 
 <style scoped lang="scss">
+.map {
+  width: 100%;
+  height: 97vh;
+}
 .ymap-container {
   width: 100%;
   height: 100%;
