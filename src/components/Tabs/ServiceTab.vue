@@ -1,6 +1,7 @@
 <template>
   <div ref="tab" :class="['tab', color]" @click="action">
     <p class="bodyRegular">{{ text }}</p>
+    <p class="bodyMedium">{{ price.toLocaleString("ru-RU") + " ₽" }}</p>
   </div>
 </template>
 
@@ -14,6 +15,11 @@ defineProps({
     required: false,
     default: "",
   },
+  price: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   color: {
     type: String as PropType<Color>,
     required: false,
@@ -24,16 +30,25 @@ defineProps({
 
 <style lang="scss" scoped>
 @import "@/styles/fonts";
-@import "@/styles/colors";
+@import "@/styles/colorsClass";
 .tab {
-  padding: 16px;
+  padding: 12px 16px;
   border-radius: 16px;
-  display: flex;
   margin-bottom: 12px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .bodyRegular {
   @extend %bodyRegular;
 
   text-align: left;
+  max-width: 58.667vw;
+}
+.bodyMedium {
+  @extend %bodyMedium;
+
+  text-align: right;
 }
 </style>

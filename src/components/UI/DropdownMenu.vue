@@ -59,7 +59,7 @@ const show = () => {
 
   .dropdown-content {
     width: 100%;
-    padding-top: 16px;
+    padding-top: 20px;
 
     .devider {
       margin-top: 24px;

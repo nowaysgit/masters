@@ -32,7 +32,7 @@
           :size="Size.large"
         />
         <TaskTab
-          ico="phone.svg"
+          ico="Tab/phone.svg"
           :line2="{ font: Font.bodyMedium, text: 'Позвонить клиенту' }"
           :color="Color.tabs"
           :size="Size.small"
@@ -54,8 +54,40 @@
             text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
           />
         </DropdownMenu>
-        <DropdownMenu name="Услуги"></DropdownMenu>
-        <DropdownMenu name="Комплектующие"></DropdownMenu>
+        <DropdownMenu name="Услуги">
+          <ServiceTab text="Дальний выезд мастера" :price="490" />
+          <ServiceTab
+            text="Установка или замена одного комплектующего"
+            :price="2290"
+          />
+          <div class="buttonContainer">
+            <ButtonMain text="Редактировать" />
+            <ButtonMain text="Добавить" ico="Button/add.svg" />
+          </div>
+        </DropdownMenu>
+        <DropdownMenu name="Комплектующие">
+          <AccessoryTab
+            text="Материнская плата GIGABYTE B660M DS3H DDR4 — 1&nbsp;шт."
+            image="mater1.png"
+            :price="16499"
+            :status="true"
+          />
+          <AccessoryTab
+            text="Процессор Intel i9-12900K — 1&nbsp;шт."
+            image="proz.png"
+            :price="132999"
+            :status="false"
+          />
+          <AccessoryTab
+            text="Термопаста Arctic Cooling MX-4 (2019) — 1&nbsp;шт."
+            :price="1169"
+            :status="false"
+          />
+          <div class="buttonContainer">
+            <ButtonMain text="Редактировать" />
+            <ButtonMain text="Добавить" ico="Button/add.svg" />
+          </div>
+        </DropdownMenu>
       </div>
     </section>
   </div>
@@ -64,6 +96,9 @@
 <script setup lang="ts">
 import TaskTab from "@/components/Tabs/TaskTab.vue";
 import InfoTab from "@/components/Tabs/InfoTab.vue";
+import ServiceTab from "@/components/Tabs/ServiceTab.vue";
+import AccessoryTab from "@/components/Tabs/AccessoryTab.vue";
+import ButtonMain from "@/components/UI/ButtonMain.vue";
 import DropdownMenu from "@/components/UI/DropdownMenu.vue";
 import { Color, Size, Font } from "@/models/UI/Enums";
 </script>
@@ -99,6 +134,11 @@ import { Color, Size, Font } from "@/models/UI/Enums";
     margin-top: 12px;
     display: flex;
     justify-content: center;
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
   }
 }
 </style>

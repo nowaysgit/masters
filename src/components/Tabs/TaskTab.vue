@@ -1,8 +1,8 @@
 <template>
   <div ref="tab" :class="['tab', color, size]" @click="action">
-    <p ref="nameDiv" class="captionRegular">{{ name }}</p>
-    <p :class="line1.font">{{ line1.text }}</p>
-    <p :class="line2.font">{{ line2.text }}</p>
+    <p v-if="name || ico" ref="nameDiv" class="captionRegular">{{ name }}</p>
+    <p v-if="line1.font" :class="line1.font">{{ line1.text }}</p>
+    <p v-if="line1.font" :class="line2.font">{{ line2.text }}</p>
   </div>
 </template>
 

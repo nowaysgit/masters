@@ -36,6 +36,13 @@
   line-height: 18px;
   letter-spacing: 0.12px;
 }
+%captionMedium {
+  @extend %fontInter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.12px;
+}
 %bodySemiBold {
   @extend %fontInter;
   font-weight: 500;
