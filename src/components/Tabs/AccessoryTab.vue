@@ -59,10 +59,6 @@ const props = defineProps({
     default: Color.tabs,
   },
 });
-
-const imgUrl = props.image
-  ? `./assets/images/accessories/${props.image}`
-  : "./assets/images/default.png";
 </script>
 
 <style lang="scss" scoped>
