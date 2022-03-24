@@ -5,7 +5,10 @@
         <TaskTab
           name="Время"
           :line1="{ font: Font.bodySemiBold, text: 'Сегодня,' }"
-          :line2="{ font: Font.bodySemiBold, text: 'в&nbsp;15:30' }"
+          :line2="{
+            font: Font.bodySemiBold,
+            text: `в&nbsp;${timeFormat(currentApplication.time)}`,
+          }"
           :color="Color.tabs"
           :size="Size.small"
         />
@@ -13,9 +16,12 @@
           name="Адрес"
           :line1="{
             font: Font.bodySemiBold,
-            text: 'ул. Байкальская, 250А',
+            text: currentApplication.address,
           }"
-          :line2="{ font: Font.bodySemiBold, text: '4 км • 9 мин' }"
+          :line2="{
+            font: Font.bodySemiBold,
+            text: `${distance} • ${duration}`,
+          }"
           :color="Color.tabs"
           :size="Size.large"
           image="map.png"
@@ -26,8 +32,14 @@
       <div class="resized">
         <TaskTab
           name="Клиент"
-          :line1="{ font: Font.bodySemiBold, text: 'Александр' }"
-          :line2="{ font: Font.bodyRegular, text: '+7 (983) 243-10-67' }"
+          :line1="{
+            font: Font.bodySemiBold,
+            text: currentApplication.client.name,
+          }"
+          :line2="{
+            font: Font.bodyRegular,
+            text: numberFormat(currentApplication.client.phoneNumber),
+          }"
           :color="Color.tabs"
           :size="Size.large"
         />
@@ -44,21 +56,14 @@
     <section class="row">
       <div class="resized column">
         <DropdownMenu name="Описание">
-          <InfoTab
-            text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
-          />
-          <InfoTab
-            text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
-          />
-          <InfoTab
-            text="Не работает видеокарта. Майнилась, в&nbsp;один момент перестала определяться виндой. Не разбиралаcь."
-          />
+          <InfoTab :text="currentApplication.description" />
         </DropdownMenu>
         <DropdownMenu name="Услуги">
-          <ServiceTab text="Дальний выезд мастера" :price="490" />
           <ServiceTab
-            text="Установка или замена одного комплектующего"
-            :price="2290"
+            v-for="service in currentApplication.services"
+            :key="service.id"
+            :text="service.name"
+            :price="service.price"
           />
           <div class="buttonContainer">
             <ButtonMain text="Редактировать" />
@@ -67,21 +72,12 @@
         </DropdownMenu>
         <DropdownMenu name="Комплектующие">
           <AccessoryTab
-            text="Материнская плата GIGABYTE B660M DS3H DDR4 — 1&nbsp;шт."
-            image="mater1.png"
-            :price="16499"
-            :status="true"
-          />
-          <AccessoryTab
-            text="Процессор Intel i9-12900K — 1&nbsp;шт."
-            image="proz.png"
-            :price="132999"
-            :status="false"
-          />
-          <AccessoryTab
-            text="Термопаста Arctic Cooling MX-4 (2019) — 1&nbsp;шт."
-            :price="1169"
-            :status="false"
+            v-for="accessory in currentApplication.accessories"
+            :key="accessory.id"
+            :text="accessory.name"
+            :price="accessory.price"
+            :image="accessory.image"
+            :status="accessory.status"
           />
           <div class="buttonContainer">
             <ButtonMain text="Редактировать" />
@@ -100,7 +96,15 @@ import ServiceTab from "@/components/Tabs/ServiceTab.vue";
 import AccessoryTab from "@/components/Tabs/AccessoryTab.vue";
 import ButtonMain from "@/components/UI/ButtonMain.vue";
 import DropdownMenu from "@/components/UI/DropdownMenu.vue";
+import { numberFormat, timeFormat } from "@/units";
 import { Color, Size, Font } from "@/models/UI/Enums";
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const currentApplication = computed(() => store.state.currentApplication);
+const distance = computed(() => store.state.distance);
+const duration = computed(() => store.state.duration);
 </script>
 
 <style lang="scss" scoped>

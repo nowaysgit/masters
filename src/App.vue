@@ -1,12 +1,12 @@
 <template>
-  <YandexMapMasters />
+  <YandexMap />
   <router-view />
   <TabBar />
 </template>
 
 <script setup lang="ts">
 import TabBar from "@/components/TabBar.vue";
-import YandexMapMasters from "@/components/YandexMapMasters.vue";
+import YandexMap from "@/components/YandexMap.vue";
 </script>
 
 <style lang="scss">

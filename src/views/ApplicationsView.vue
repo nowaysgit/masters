@@ -12,7 +12,7 @@
       </div>
     </template>
     <template v-slot:body>
-      <ActiveApplication></ActiveApplication>
+      <ActiveApplication v-if="status === Status.active"></ActiveApplication>
     </template>
   </BaseSheet>
 </template>
@@ -22,7 +22,12 @@ import ActiveApplication from "@/components/Applications/ActiveApplication.vue";
 import BaseSheet from "@/components/UI/BaseSheet.vue";
 import FullBackground from "@/components/UI/FullBackground";
 import { ref } from "vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
+import { Status } from "@/store";
 
+const store = useStore();
+const status = computed(() => store.state.status);
 const title = ref("Активная заявка");
 </script>
 
