@@ -1,40 +1,31 @@
 <template>
   <div ref="tab" :class="['tab', color]" @click="action">
-    <p v-if="ico" ref="textDiv" class="img" />
-    <p class="bodyMedium">{{ text }}</p>
+    <IconColor
+      v-if="ico"
+      :ico="ico"
+      :color="icoColor"
+      ref="textDiv"
+      class="img"
+    />
+    <p class="bodyMedium" :style="`color: ${textColor}`">{{ text }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType, ref } from "vue";
-import { Color } from "@/models/UI/Enums";
-import useIconBackground from "@/hooks/IconBackground";
+import { defineProps, ref } from "vue";
+import IconColor from "@/components/UI/IconColor";
+import { Props } from "@/models/UI/Props";
 
-const props = defineProps({
-  text: {
-    type: String,
-    required: false,
-    default: "",
-  },
-  price: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  color: {
-    type: String as PropType<Color>,
-    required: false,
-    default: Color.tabs,
-  },
-  ico: {
-    type: String,
-    required: false,
-    default: "",
-  },
+defineProps({
+  text: Props.text,
+  price: Props.number,
+  color: Props.colorClass,
+  icoColor: Props.colorRgba,
+  textColor: Props.colorRgba,
+  ico: Props.ico,
+  action: Props.action,
 });
-
 const textDiv = ref();
-if (props.ico) useIconBackground(textDiv, props.ico, "22px", "0");
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +39,10 @@ if (props.ico) useIconBackground(textDiv, props.ico, "22px", "0");
   display: flex;
   align-items: center;
   justify-content: center;
+
+  --smooth-corners: 60;
+  mask-image: paint(smooth-corners);
+  -webkit-mask-image: paint(smooth-corners);
 }
 .img {
   margin-right: 8px;

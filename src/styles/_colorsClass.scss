@@ -1,13 +1,16 @@
 @import "@/styles/colors";
 .tabs {
-  background-color: $tabs;
+  background-color: $tabs !important;
 }
 .green {
-  background-color: $green;
+  background-color: $green !important;
 }
 .blue {
-  background-color: $blue;
+  background-color: $blue !important;
 }
 .red {
-  background-color: $red;
+  background-color: $red !important;
+}
+.bottomSheet {
+  background-color: $bottomSheet !important;
 }

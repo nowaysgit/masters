@@ -3,7 +3,7 @@
     <slot name="header"></slot>
     <div style="margin-bottom: 70px"></div>
     <slot name="body"></slot>
-    <div style="margin-top: 230px"></div>
+    <div style="margin-top: 82px"></div>
   </div>
 </template>
 
@@ -12,6 +12,8 @@
 .sheet {
   z-index: 2;
   position: fixed;
+  display: flex;
+  flex-direction: column;
   top: 0;
   left: 0;
   right: 0;

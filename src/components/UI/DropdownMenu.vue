@@ -16,15 +16,13 @@
 
 <script setup lang="ts">
 import { ref, computed, defineProps } from "vue";
-const isShow = ref(false);
+import { Props } from "@/models/UI/Props";
+
 defineProps({
-  name: {
-    type: String,
-    required: false,
-    default: "DropdownMenu",
-  },
+  name: Props.text,
 });
 
+const isShow = ref(false);
 const ico = computed(() => {
   return `../assets/icons/${isShow.value ? "arrowon.svg" : "arrowoff.svg"}`;
 });

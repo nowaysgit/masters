@@ -1,6 +1,6 @@
 <template>
   <BottomSheet :title="title">
-    <ActiveApplication v-if="status === Status.active" />
+    <ActiveApplication v-if="type === Type.active" />
   </BottomSheet>
 </template>
 
@@ -10,10 +10,10 @@ import BottomSheet from "@/components/UI/BottomSheet.vue";
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { Status } from "@/store";
+import { Type } from "@/models/Application";
 
 const store = useStore();
-const status = computed(() => store.state.status);
+const type: Type = computed(() => store.state.application.current?.type);
 const title = ref("Активная заявка");
 </script>
 

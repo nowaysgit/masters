@@ -70,7 +70,7 @@ export default function useLeaving(
       getHtml(background).style.visibility = "hidden";
       getHtml(background).style.opacity = "0";
     } else if (currentValue === 2) {
-      getHtml(panel).style.top = "calc(100vh - 316px)";
+      getHtml(panel).style.top = `calc(100vh - 316px)`;
       getHtml(background).style.visibility = "hidden";
       getHtml(background).style.opacity = "0";
     } else {

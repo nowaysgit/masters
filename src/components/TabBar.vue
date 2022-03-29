@@ -25,7 +25,7 @@
 @import "@/styles/fonts";
 @import "@/styles/colors";
 .container {
-  z-index: 5;
+  z-index: 3;
   position: fixed;
   bottom: 0;
   left: 0;

@@ -6,37 +6,25 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, PropType } from "vue";
-import { Color } from "@/models/UI/Enums";
+import { defineProps } from "vue";
+import { Props } from "@/models/UI/Props";
 
 defineProps({
-  text: {
-    type: String,
-    required: false,
-    default: "",
-  },
-  price: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  color: {
-    type: String as PropType<Color>,
-    required: false,
-    default: Color.tabs,
-  },
+  text: Props.text,
+  price: Props.number,
+  color: Props.colorClass,
 });
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/fonts";
 @import "@/styles/colorsClass";
+@import "@/styles/Tabs";
 .tab {
+  @extend %tab;
+  border-radius: 18px;
   padding: 12px 16px;
-  border-radius: 16px;
-  margin-bottom: 12px;
-  min-height: 44px;
-  display: flex;
+  min-height: 68px;
   align-items: center;
   justify-content: space-between;
 }

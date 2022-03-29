@@ -1,0 +1,17 @@
+@import "@/styles/colors";
+%tab {
+  padding: 16px;
+  display: flex;
+  margin-bottom: 12px;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  background-color: $tabs;
+  border: 0.5px solid rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  --smooth-corners: 60.0;
+  mask-image: paint(smooth-corners);
+  -webkit-mask-image: paint(smooth-corners);
+}

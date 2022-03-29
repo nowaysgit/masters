@@ -14,6 +14,6 @@ export const numberFormat = (number: string) => {
 };
 
 export const timeFormat = (number: number) => {
-  const date = new Date(number);
+  const date = new Date(number * 1000);
   return `${date.getHours()}:${date.getMinutes()}`;
 };

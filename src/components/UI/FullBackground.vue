@@ -1,5 +1,5 @@
 <template>
-  <div class="fullBackground"></div>
+  <div @click.stop="$emit('onclick')" class="fullBackground"></div>
 </template>
 
 <style lang="scss" scoped>

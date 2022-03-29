@@ -2,112 +2,297 @@
   <div class="container">
     <section class="row">
       <div class="resized">
-        <TaskTab
+        <TimeTab
           name="Время"
-          :line1="{ font: Font.bodySemiBold, text: 'Сегодня,' }"
-          :line2="{
-            font: Font.bodySemiBold,
-            text: `в&nbsp;${timeFormat(currentApplication.time)}`,
-          }"
-          :color="Color.tabs"
-          :size="Size.small"
+          :time="application.time"
+          :executionStatus="application.executionStatus"
         />
         <TaskTab
           name="Адрес"
+          ico="Tab/arrow-right.svg"
           :line1="{
             font: Font.bodySemiBold,
-            text: currentApplication.address,
+            text: application.address,
           }"
           :line2="{
             font: Font.bodySemiBold,
-            text: `${distance} • ${duration}`,
+            text:
+              application.executionStatus == ExecutionStatus.wait
+                ? `${map.distance} • ${map.duration}`
+                : application.addressRefined,
           }"
-          :color="Color.tabs"
-          :size="Size.large"
+          :color="ColorClass.tabs"
           image="map.png"
         />
       </div>
     </section>
-    <section class="row">
+    <section
+      v-if="application.executionStatus !== ExecutionStatus.wait"
+      class="row"
+    >
       <div class="resized">
         <TaskTab
           name="Клиент"
           :line1="{
-            font: Font.bodySemiBold,
-            text: currentApplication.client.name,
+            font: Font.title2,
+            text: application.client.name,
           }"
           :line2="{
             font: Font.bodyRegular,
-            text: numberFormat(currentApplication.client.phoneNumber),
+            text: numberFormat(application.client.phoneNumber),
           }"
-          :color="Color.tabs"
-          :size="Size.large"
+          :color="
+            application.executionStatus == ExecutionStatus.arrived
+              ? ColorClass.green
+              : ColorClass.tabs
+          "
         />
-        <TaskTab
+        <ButtonTab
           ico="Tab/phone.svg"
-          :line2="{ font: Font.bodyMedium, text: 'Позвонить клиенту' }"
-          :color="Color.tabs"
-          :size="Size.small"
+          :line1="{ font: Font.bodyMedium, text: 'Позвонить клиенту' }"
+          :color="ColorClass.tabs"
         />
       </div>
     </section>
+    <section
+      v-if="application.executionStatus !== ExecutionStatus.started"
+      class="row"
+    >
+      <div class="resized">
+        <InfoTab :text="application.description" :tags="application.tags" />
+      </div>
+    </section>
   </div>
-  <div class="container">
+  <div
+    v-if="application.executionStatus === ExecutionStatus.started"
+    class="container"
+    style="margin-bottom: 60px"
+  >
     <section class="row">
       <div class="resized column">
         <DropdownMenu name="Описание">
-          <InfoTab :text="currentApplication.description" />
+          <InfoTab :text="application.description" :tags="application.tags" />
         </DropdownMenu>
         <DropdownMenu name="Услуги">
           <ServiceTab
-            v-for="service in currentApplication.services"
+            v-for="service in application.services"
             :key="service.id"
             :text="service.name"
             :price="service.price"
           />
-          <div class="buttonContainer">
-            <ButtonMain text="Редактировать" />
-            <ButtonMain text="Добавить" ico="Button/add.svg" />
-          </div>
+          <ButtonMain
+            v-if="application.services.length > 0"
+            text="Добавить еще"
+            icoColor="rgba(35, 184, 73, 1)"
+            ico="Button/add-services.svg"
+            :color="ColorClass.bottomSheet"
+            :action="addServices"
+          />
+          <AddElementTab
+            v-else
+            name="Добавить услугу"
+            text="Добавьте все предоставленные вами клиенту услуги"
+            icoColor="rgba(35, 184, 73, 1)"
+            ico="Button/add-services.svg"
+            :color="ColorClass.tabs"
+            :action="addServices"
+          />
         </DropdownMenu>
         <DropdownMenu name="Комплектующие">
           <AccessoryTab
-            v-for="accessory in currentApplication.accessories"
+            v-for="accessory in application.accessories"
             :key="accessory.id"
             :text="accessory.name"
             :price="accessory.price"
             :image="accessory.image"
             :status="accessory.status"
           />
-          <div class="buttonContainer">
-            <ButtonMain text="Редактировать" />
-            <ButtonMain text="Добавить" ico="Button/add.svg" />
-          </div>
+          <ButtonMain
+            v-if="application.accessories.length > 0"
+            text="Добавить еще"
+            icoColor="rgba(35, 184, 73, 1)"
+            ico="Button/add-accessories.svg"
+            :color="ColorClass.bottomSheet"
+            :action="addAccessories"
+          />
+          <AddElementTab
+            v-else
+            name="Добавить комплектующее"
+            text="Добавьте все необходимые комплектующие"
+            icoColor="rgba(35, 184, 73, 1)"
+            ico="Button/add-accessories.svg"
+            :color="ColorClass.tabs"
+            :action="addAccessories"
+          />
         </DropdownMenu>
       </div>
     </section>
   </div>
+  <div class="container buttons">
+    <div
+      v-if="application.executionStatus === ExecutionStatus.wait"
+      class="row"
+    >
+      <div class="resized">
+        <ButtonMain text="Показать на карте" />
+      </div>
+    </div>
+    <div
+      v-if="application.executionStatus === ExecutionStatus.wait"
+      class="row"
+    >
+      <div class="resized">
+        <ButtonMain
+          text="Отказаться от заявки"
+          :icoColor="ColorRgba.red"
+          :action="() => store.dispatch('canselApplication')"
+        />
+      </div>
+    </div>
+    <div
+      v-if="application.executionStatus === ExecutionStatus.lateness"
+      class="row"
+    >
+      <div class="resized">
+        <ButtonMain text="Клиент не отвечает" />
+      </div>
+    </div>
+    <div
+      v-if="
+        application.executionStatus === ExecutionStatus.arrived ||
+        application.executionStatus === ExecutionStatus.lateness
+      "
+      class="row"
+    >
+      <div class="resized">
+        <ButtonMain
+          text="Начать работу"
+          :color="ColorClass.blue"
+          :action="() => store.dispatch('startApplication')"
+        />
+      </div>
+    </div>
+    <div
+      v-if="application.executionStatus === ExecutionStatus.started"
+      class="row"
+    >
+      <div class="resized">
+        <ButtonMain
+          text="Завершение заявки"
+          :color="ColorClass.blue"
+          :action="() => store.dispatch('completeApplication')"
+        />
+      </div>
+    </div>
+  </div>
+  <BottomPopUp
+    title="Услуги"
+    @hide="hideServices"
+    :isShow="servicesPopUpShowed"
+  >
+    <MenuItem
+      name="Пакеты услуг"
+      ico="Services/packages.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+    <MenuItem
+      name="Общие услуги"
+      ico="Services/general.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+    <MenuItem
+      name="Аппаратная часть"
+      ico="Services/hardware.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+    <MenuItem
+      name="Программная часть"
+      ico="Services/software.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+  </BottomPopUp>
+  <BottomPopUp
+    title="Добавить комплектующее"
+    @hide="hideAccessories"
+    :isShow="accessoriesPopUpShowed"
+  >
+    <MenuItem
+      name="Пакеты услуг"
+      ico="Services/packages.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+    <MenuItem
+      name="Общие услуги"
+      ico="Services/general.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+    <MenuItem
+      name="Аппаратная часть"
+      ico="Services/hardware.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+    <MenuItem
+      name="Программная часть"
+      ico="Services/software.svg"
+      icoColor="rgba(35, 184, 73, 1)"
+    />
+  </BottomPopUp>
 </template>
 
 <script setup lang="ts">
-import TaskTab from "@/components/Tabs/TaskTab.vue";
-import InfoTab from "@/components/Tabs/InfoTab.vue";
-import ServiceTab from "@/components/Tabs/ServiceTab.vue";
-import AccessoryTab from "@/components/Tabs/AccessoryTab.vue";
-import ButtonMain from "@/components/UI/ButtonMain.vue";
-import DropdownMenu from "@/components/UI/DropdownMenu.vue";
-import { numberFormat, timeFormat } from "@/units";
-import { Color, Size, Font } from "@/models/UI/Enums";
-import { computed } from "vue";
+import TaskTab from "@/components/Tabs/TaskTab";
+import TimeTab from "@/components/Tabs/TimeTab";
+import InfoTab from "@/components/Tabs/InfoTab";
+import ButtonTab from "@/components/Tabs/ButtonTab";
+import ServiceTab from "@/components/Tabs/ServiceTab";
+import AccessoryTab from "@/components/Tabs/AccessoryTab";
+import AddElementTab from "@/components/Tabs/AddElementTab";
+import ButtonMain from "@/components/UI/ButtonMain";
+import DropdownMenu from "@/components/UI/DropdownMenu";
+import BottomPopUp from "@/components/UI/BottomPopUp";
+import { numberFormat } from "@/units";
+import { ColorClass, Font, ColorRgba } from "@/models/UI/Enums";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { Application, ExecutionStatus } from "@/models/Application";
+import MenuItem from "@/components/UI/MenuItem";
+const servicesPopUpShowed = ref(false);
+const accessoriesPopUpShowed = ref(false);
 
 const store = useStore();
-const currentApplication = computed(() => store.state.currentApplication);
-const distance = computed(() => store.state.distance);
-const duration = computed(() => store.state.duration);
+const application: Application = computed(
+  () => store.state.application.current
+);
+const map: Map = computed(() => store.state.map);
+
+//crutch FIX IT
+const hideServices = () => {
+  servicesPopUpShowed.value = !servicesPopUpShowed.value;
+};
+const hideAccessories = () => {
+  accessoriesPopUpShowed.value = !accessoriesPopUpShowed.value;
+};
+const addServices = () => {
+  servicesPopUpShowed.value = !servicesPopUpShowed.value;
+};
+const addAccessories = () => {
+  accessoriesPopUpShowed.value = !accessoriesPopUpShowed.value;
+};
 </script>
 
 <style lang="scss" scoped>
+.buttons {
+  bottom: 0;
+  margin-top: auto;
+  .row {
+    .resized {
+      div {
+        width: 100%;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
 .container {
   @media (max-width: 369px) {
     padding-left: 0;
@@ -135,7 +320,6 @@ const duration = computed(() => store.state.duration);
     flex-direction: column;
   }
   .row {
-    margin-top: 12px;
     display: flex;
     justify-content: center;
   }

@@ -43,7 +43,7 @@ const { panelStartTouch, panelEndTouch } = useLeaving(sheet, background);
   height: calc(100vh - 52px);
 }
 .header {
-  z-index: 3;
+  z-index: 2;
   position: fixed;
   width: 100%;
   padding-bottom: 20px;

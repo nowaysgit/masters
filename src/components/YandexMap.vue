@@ -96,8 +96,8 @@ function ready() {
         duration = routes[i].properties.get("duration").text;
       }
     }
-    store.state.distance = text;
-    store.state.duration = duration;
+    store.commit("updateDistance", text);
+    store.commit("updateDuration", duration);
   };
 
   multiRouteModel.events.add(

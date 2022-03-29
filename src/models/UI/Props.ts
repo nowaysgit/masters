@@ -1,28 +1,27 @@
-import { Color, Font, Size } from "@/models/UI/Enums";
+import { ColorClass, Font } from "@/models/UI/Enums";
 import { PropType } from "vue";
 
 export interface Line {
   font: Font;
   text: string;
 }
-
 export const Props = {
-  name: {
+  text: {
     type: String,
     required: false,
     default: "",
   },
-  line1: {
-    type: Object as PropType<Line>,
+  boolean: {
+    type: Boolean,
     required: false,
-    default() {
-      return {
-        font: Font.bodySemiBold,
-        text: "",
-      };
-    },
+    default: false,
   },
-  line2: {
+  number: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  line: {
     type: Object as PropType<Line>,
     required: false,
     default() {
@@ -42,15 +41,15 @@ export const Props = {
     required: false,
     default: "",
   },
-  color: {
-    type: String as PropType<Color>,
+  colorClass: {
+    type: String as PropType<ColorClass>,
     required: false,
-    default: Color.tabs,
+    default: ColorClass.tabs,
   },
-  size: {
-    type: String as PropType<Size>,
+  colorRgba: {
+    type: String,
     required: false,
-    default: Size.small,
+    default: "rgba(255, 255, 255, 1)",
   },
   action: {
     type: Function as PropType<(id: number) => void>,

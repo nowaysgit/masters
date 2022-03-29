@@ -1,12 +1,75 @@
 <template>
   <YandexMap />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <keep-alive>
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
   <TabBar />
 </template>
 
 <script setup lang="ts">
 import TabBar from "@/components/TabBar.vue";
 import YandexMap from "@/components/YandexMap.vue";
+import { ExecutionStatus, Tags, Type } from "@/models/Application";
+
+//FOR TEST
+import { useStore } from "vuex";
+const store = useStore();
+store.dispatch("takeApplication", {
+  id: 1,
+  time: 1648490023,
+  workTime: 0,
+  type: Type.active,
+  tags: [Tags.new, Tags.hardware],
+  executionStatus: ExecutionStatus.wait,
+  address: "ул. Байкальская, 250А",
+  addressRefined: "п-д. №3, 6 этаж, кв. 356",
+  coords: [52.253839, 104.336311],
+  client: {
+    id: 1,
+    name: "Александр",
+    phoneNumber: "79832431067",
+  },
+  price: 100,
+  description:
+    "Не работает видеокарта. Майнилась, в\u00A0один момент перестала определяться виндой. Не разбиралаcь.",
+  services: [
+    {
+      id: 1,
+      name: "Дальний выезд мастера",
+      price: 490,
+    },
+    {
+      id: 2,
+      name: "Установка или замена одного комплектующего",
+      price: 2290,
+    },
+  ],
+  accessories: [
+    {
+      id: 1,
+      name: "Материнская плата GIGABYTE B660M DS3H DDR4 — 1\u00A0шт.",
+      image: "mater.png",
+      price: 16499,
+      status: true,
+    },
+    {
+      id: 2,
+      name: "Процессор Intel i9-12900K — 1\u00A0шт.",
+      image: "proz.png",
+      price: 132999,
+      status: false,
+    },
+    {
+      id: 3,
+      name: "Термопаста Arctic Cooling MX-4 (2019) — 1\u00A0шт.",
+      image: "",
+      price: 1169,
+      status: false,
+    },
+  ],
+});
 </script>
 
 <style lang="scss">

@@ -12,7 +12,7 @@
       </div>
     </template>
     <template v-slot:body>
-      <ActiveApplication v-if="status === Status.active"></ActiveApplication>
+      <ActiveApplication v-if="type === Type.active"></ActiveApplication>
     </template>
   </BaseSheet>
 </template>
@@ -24,10 +24,10 @@ import FullBackground from "@/components/UI/FullBackground";
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { Status } from "@/store";
+import { Type } from "@/models/Application";
 
 const store = useStore();
-const status = computed(() => store.state.status);
+const type: Type = computed(() => store.state.application.current?.type);
 const title = ref("Активная заявка");
 </script>
 
