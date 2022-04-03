@@ -13,6 +13,7 @@ defineProps({
   text: Props.text,
   price: Props.number,
   color: Props.colorClass,
+  action: Props.action,
 });
 </script>
 

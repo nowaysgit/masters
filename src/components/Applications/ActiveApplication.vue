@@ -75,7 +75,9 @@
         </DropdownMenu>
         <DropdownMenu name="Услуги">
           <ServiceTab
-            v-for="service in application.services"
+            v-for="service in services.filter((x) =>
+              application.services.includes(x.id)
+            )"
             :key="service.id"
             :text="service.name"
             :price="service.price"
@@ -87,6 +89,7 @@
             ico="Button/add-services.svg"
             :color="ColorClass.bottomSheet"
             :action="addServices"
+            class="button"
           />
           <AddElementTab
             v-else
@@ -96,6 +99,7 @@
             ico="Button/add-services.svg"
             :color="ColorClass.tabs"
             :action="addServices"
+            class="button"
           />
         </DropdownMenu>
         <DropdownMenu name="Комплектующие">
@@ -114,6 +118,7 @@
             ico="Button/add-accessories.svg"
             :color="ColorClass.bottomSheet"
             :action="addAccessories"
+            class="button"
           />
           <AddElementTab
             v-else
@@ -123,6 +128,7 @@
             ico="Button/add-accessories.svg"
             :color="ColorClass.tabs"
             :action="addAccessories"
+            class="button"
           />
         </DropdownMenu>
       </div>
@@ -185,58 +191,8 @@
       </div>
     </div>
   </div>
-  <BottomPopUp
-    title="Услуги"
-    @hide="hideServices"
-    :isShow="servicesPopUpShowed"
-  >
-    <MenuItem
-      name="Пакеты услуг"
-      ico="Services/packages.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-    <MenuItem
-      name="Общие услуги"
-      ico="Services/general.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-    <MenuItem
-      name="Аппаратная часть"
-      ico="Services/hardware.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-    <MenuItem
-      name="Программная часть"
-      ico="Services/software.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-  </BottomPopUp>
-  <BottomPopUp
-    title="Добавить комплектующее"
-    @hide="hideAccessories"
-    :isShow="accessoriesPopUpShowed"
-  >
-    <MenuItem
-      name="Пакеты услуг"
-      ico="Services/packages.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-    <MenuItem
-      name="Общие услуги"
-      ico="Services/general.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-    <MenuItem
-      name="Аппаратная часть"
-      ico="Services/hardware.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-    <MenuItem
-      name="Программная часть"
-      ico="Services/software.svg"
-      icoColor="rgba(35, 184, 73, 1)"
-    />
-  </BottomPopUp>
+  <AddService @hide="addServices" :isShow="servicesShowed" />
+  <AddAccessories @hide="addAccessories" :isShow="accessoriesShowed" />
 </template>
 
 <script setup lang="ts">
@@ -249,34 +205,28 @@ import AccessoryTab from "@/components/Tabs/AccessoryTab";
 import AddElementTab from "@/components/Tabs/AddElementTab";
 import ButtonMain from "@/components/UI/ButtonMain";
 import DropdownMenu from "@/components/UI/DropdownMenu";
-import BottomPopUp from "@/components/UI/BottomPopUp";
+import AddService from "@/components/Applications/AddService";
+import AddAccessories from "@/components/Applications/AddAccessories";
 import { numberFormat } from "@/units";
 import { ColorClass, Font, ColorRgba } from "@/models/UI/Enums";
+import { Application, ExecutionStatus } from "@/models/Application";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import { Application, ExecutionStatus } from "@/models/Application";
-import MenuItem from "@/components/UI/MenuItem";
-const servicesPopUpShowed = ref(false);
-const accessoriesPopUpShowed = ref(false);
-
 const store = useStore();
+
+const servicesShowed = ref(false);
+const accessoriesShowed = ref(false);
+const map: Map = computed(() => store.state.map);
+const services: number[] = computed(() => store.state.serviceDate.services);
 const application: Application = computed(
   () => store.state.application.current
 );
-const map: Map = computed(() => store.state.map);
 
-//crutch FIX IT
-const hideServices = () => {
-  servicesPopUpShowed.value = !servicesPopUpShowed.value;
-};
-const hideAccessories = () => {
-  accessoriesPopUpShowed.value = !accessoriesPopUpShowed.value;
-};
 const addServices = () => {
-  servicesPopUpShowed.value = !servicesPopUpShowed.value;
+  servicesShowed.value = !servicesShowed.value;
 };
 const addAccessories = () => {
-  accessoriesPopUpShowed.value = !accessoriesPopUpShowed.value;
+  accessoriesShowed.value = !accessoriesShowed.value;
 };
 </script>
 
@@ -286,12 +236,15 @@ const addAccessories = () => {
   margin-top: auto;
   .row {
     .resized {
-      div {
+      button {
         width: 100%;
         margin-bottom: 12px;
       }
     }
   }
+}
+button {
+  width: 100%;
 }
 .container {
   @media (max-width: 369px) {

@@ -21,6 +21,13 @@
   line-height: 22px;
   letter-spacing: -0.22px;
 }
+%title2Medium {
+  @extend %fontInter;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 22px;
+  letter-spacing: -0.22px;
+}
 %title3 {
   @extend %fontInter;
   font-weight: 500;
@@ -44,6 +51,12 @@
 %smallMedium {
   @extend %fontInter;
   font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+}
+%smallSemiBold {
+  @extend %fontInter;
+  font-weight: 600;
   font-size: 13px;
   line-height: 18px;
 }

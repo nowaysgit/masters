@@ -3,7 +3,7 @@
     <IconColor
       v-if="ico"
       :ico="ico"
-      :color="colorRgba"
+      :color="icoColor"
       ref="textDiv"
       class="img"
     />
@@ -25,6 +25,7 @@ defineProps({
   color: Props.colorClass,
   ico: Props.ico,
   icoColor: Props.colorRgba,
+  action: Props.action,
 });
 </script>
 

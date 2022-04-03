@@ -1,31 +1,28 @@
 <template>
-  <div ref="tab" :class="['tab', color]" @click="action">
+  <button :class="['tab', color]" @click="action">
     <IconColor
       v-if="ico"
       :ico="ico"
       :color="icoColor"
-      ref="textDiv"
-      class="img"
+      :style="text ? 'margin-right: 8px' : 'padding-top: 4px'"
     />
     <p class="bodyMedium" :style="`color: ${textColor}`">{{ text }}</p>
-  </div>
+  </button>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
+import { defineProps } from "vue";
 import IconColor from "@/components/UI/IconColor";
 import { Props } from "@/models/UI/Props";
 
 defineProps({
   text: Props.text,
-  price: Props.number,
   color: Props.colorClass,
   icoColor: Props.colorRgba,
   textColor: Props.colorRgba,
   ico: Props.ico,
   action: Props.action,
 });
-const textDiv = ref();
 </script>
 
 <style lang="scss" scoped>
@@ -43,6 +40,9 @@ const textDiv = ref();
   --smooth-corners: 60;
   mask-image: paint(smooth-corners);
   -webkit-mask-image: paint(smooth-corners);
+}
+.tab:disabled {
+  opacity: 0.32;
 }
 .img {
   margin-right: 8px;

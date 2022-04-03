@@ -3,10 +3,17 @@ export interface Client {
   name: string;
   phoneNumber: string;
 }
+export enum ServiceCategory {
+  packages,
+  general,
+  hardware,
+  software,
+}
 export interface Service {
   id: number;
   name: string;
   price: number;
+  category: ServiceCategory;
 }
 export interface Accessory {
   id: number;
@@ -47,6 +54,6 @@ export interface Application {
   client: Client;
   price: number;
   description: string;
-  services: Service[];
+  services: number[];
   accessories: Accessory[];
 }

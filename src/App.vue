@@ -11,11 +11,30 @@
 <script setup lang="ts">
 import TabBar from "@/components/TabBar.vue";
 import YandexMap from "@/components/YandexMap.vue";
-import { ExecutionStatus, Tags, Type } from "@/models/Application";
+import {
+  ExecutionStatus,
+  Tags,
+  Type,
+  ServiceCategory,
+} from "@/models/Application";
 
 //FOR TEST
 import { useStore } from "vuex";
 const store = useStore();
+store.commit("updateServices", [
+  {
+    id: 1,
+    name: "Дальний выезд мастера",
+    price: 490,
+    category: ServiceCategory.general,
+  },
+  {
+    id: 2,
+    name: "Установка или замена одного комплектующего",
+    price: 2290,
+    category: ServiceCategory.hardware,
+  },
+]);
 store.dispatch("takeApplication", {
   id: 1,
   time: 1648490023,
@@ -34,18 +53,7 @@ store.dispatch("takeApplication", {
   price: 100,
   description:
     "Не работает видеокарта. Майнилась, в\u00A0один момент перестала определяться виндой. Не разбиралаcь.",
-  services: [
-    {
-      id: 1,
-      name: "Дальний выезд мастера",
-      price: 490,
-    },
-    {
-      id: 2,
-      name: "Установка или замена одного комплектующего",
-      price: 2290,
-    },
-  ],
+  services: [1, 2],
   accessories: [
     {
       id: 1,
@@ -77,9 +85,16 @@ store.dispatch("takeApplication", {
 * {
   margin: 0;
   padding: 0;
+  border: 0;
 }
 a {
   text-decoration: none;
+}
+input {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: none;
 }
 #app {
   font-family: "Inter";

@@ -4,6 +4,7 @@
       <div class="info">
         <IconColor :ico="ico" :color="icoColor" class="img" size="28px" />
         <p class="title3">{{ name }}</p>
+        <div v-if="count > 0" class="smallSemiBold">{{ count }}</div>
       </div>
       <IconColor
         ico="Button/arrow.svg"
@@ -11,7 +12,7 @@
         size="22px"
       />
     </div>
-    <hr class="devider" />
+    <hr v-if="devider" class="devider" />
   </div>
 </template>
 
@@ -25,6 +26,12 @@ defineProps({
   ico: Props.ico,
   icoColor: Props.colorRgba,
   action: Props.action,
+  devider: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  count: Props.number,
 });
 </script>
 
@@ -33,19 +40,30 @@ defineProps({
 @import "@/styles/colors";
 .button {
   margin-left: 20px;
-  padding-top: 4px;
   margin-right: 15px;
+  margin-top: 12px;
   .content {
     display: flex;
     justify-content: space-between;
 
     .info {
       display: flex;
-      .title3 {
-        @extend %title3;
-      }
       .img {
         margin-right: 16px;
+      }
+      .title3 {
+        @extend %title3;
+        margin-right: 8px;
+      }
+      .smallSemiBold {
+        @extend %smallSemiBold;
+        text-align: center;
+        padding-top: 1px;
+
+        background-color: rgba(35, 184, 73, 1);
+        border-radius: 100%;
+        width: 22px;
+        height: 21px;
       }
     }
   }

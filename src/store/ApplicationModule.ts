@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { Application, ExecutionStatus } from "@/models/Application";
+import { Accessory, Application, ExecutionStatus } from "@/models/Application";
 import { RootState } from "@/store/index";
 
 export interface ApplicationState {
@@ -16,6 +16,12 @@ export const ApplicationModule: Module<ApplicationState, RootState> = {
   mutations: {
     updateCurrent(state: ApplicationState, application: Application) {
       state.current = application;
+    },
+    updateApplicationServices(state: ApplicationState, services: number[]) {
+      if (state.current) state.current.services = services;
+    },
+    addApplicationAccessory(state: ApplicationState, accessory: Accessory) {
+      if (state.current) state.current.accessories.push(accessory);
     },
   },
   actions: {

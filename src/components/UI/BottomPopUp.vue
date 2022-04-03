@@ -81,7 +81,7 @@ onMounted(() => {
   z-index: 4;
   position: fixed;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 24px;
 
   background-color: $bottomSheet2;
   border-radius: 20px 20px 0px 0px;

@@ -5,11 +5,27 @@ export interface Line {
   font: Font;
   text: string;
 }
+export interface Option {
+  code: string;
+  label: string;
+}
 export const Props = {
   text: {
     type: String,
     required: false,
     default: "",
+  },
+  options: {
+    type: Array as PropType<Array<Option>>,
+    required: false,
+    default() {
+      return [
+        {
+          code: "",
+          text: "",
+        },
+      ];
+    },
   },
   boolean: {
     type: Boolean,
