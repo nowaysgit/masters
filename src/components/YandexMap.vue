@@ -86,6 +86,7 @@ function ready() {
 
   const updateDistance = () => {
     const routes = multiRouteModel.getRoutes();
+    if (routes.length <= 0) return;
     let distance = routes[0].properties.get("distance").value;
     let text = routes[0].properties.get("distance").text;
     let duration = routes[0].properties.get("duration").text;

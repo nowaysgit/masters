@@ -43,7 +43,6 @@
 </template>
 
 <script setup lang="ts">
-import { Accessory } from "@/models/Application";
 import BottomPopUp from "@/components/UI/BottomPopUp";
 import InputMain from "@/components/UI/InputMain";
 import SelectMain from "@/components/UI/SelectMain";
@@ -72,9 +71,6 @@ for (let i = 1; i < 100; i++) {
   opt.push({ code: i, label: i.toString() });
 }
 const options = ref<Option[]>(opt);
-const accessories: Accessory[] = computed(
-  () => store.state.accessory.accessories
-);
 const emit = defineEmits(["hide"]);
 defineProps({
   isShow: {
@@ -93,8 +89,8 @@ const SetCheck = (e: Event) => {
   reader.readAsDataURL(checkFile.value);
 };
 const Save = () => {
-  console.log("SAVE");
   const current = store.state.application.current;
+  //NEED REFACT prev send to server
   const id =
     current.accessories && current.accessories.length > 0
       ? current.accessories[current.accessories.length - 1].id + 1

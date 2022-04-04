@@ -44,6 +44,12 @@ export const ApplicationModule: Module<ApplicationState, RootState> = {
       store.commit("updateCurrent", application);
       store.dispatch("startTimer");
       Send(Event.takeApplication, application.id);
+
+      //NEED GET USER COORDS
+      store.commit("updateRoute", {
+        start: [52.261444, 104.308307],
+        end: application.coords,
+      });
     },
     startApplication(store) {
       if (store.state.current?.executionStatus != null) {

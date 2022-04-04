@@ -96,6 +96,11 @@ class Functions {
   async getApplication(application: Application) {
     store.commit("updateCurrent", application);
     await store.dispatch("startTimer");
+    //NEED GET USER COORDS
+    store.commit("updateRoute", {
+      start: [52.290196, 104.301334],
+      end: application.coords,
+    });
 
     if (application) {
       for (const accessoryId of application.accessories) {

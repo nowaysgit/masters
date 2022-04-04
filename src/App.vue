@@ -11,17 +11,9 @@
 <script setup lang="ts">
 import TabBar from "@/components/TabBar.vue";
 import YandexMap from "@/components/YandexMap.vue";
-import {
-  ExecutionStatus,
-  Tags,
-  Type,
-  ServiceCategory,
-} from "@/models/Application";
 
 //FOR TEST
-import { useStore } from "vuex";
 import { Event, Send } from "@/network";
-const store = useStore();
 
 Send(Event.getServices);
 Send(Event.getUser);

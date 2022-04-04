@@ -7,8 +7,8 @@ export interface MapState {
   duration: string;
 }
 export interface Coords {
-  x: number[] | string;
-  y: number[] | string;
+  start: number[] | string;
+  end: number[] | string;
 }
 
 export const MapModule: Module<MapState, RootState> = {
@@ -27,12 +27,10 @@ export const MapModule: Module<MapState, RootState> = {
     updateDuration(state: MapState, duration: string) {
       state.duration = duration;
     },
-  },
-  actions: {
     //updateRoute([52.273958, 104.356896], [52.253839, 104.336311])
     //updateRoute("ул. Байкальская, 250А", [52.253839, 104.336311])
-    updateRoute(state: any, { x, y }: Coords) {
-      state.route.setReferencePoints([x, y]);
+    updateRoute(state: MapState, { start, end }: Coords) {
+      state.route.setReferencePoints([start, end]);
     },
   },
 };
