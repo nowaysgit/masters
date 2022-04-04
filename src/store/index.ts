@@ -1,18 +1,21 @@
 import { createStore } from "vuex";
 import { MapModule, MapState } from "@/store/MapModule";
 import { ApplicationModule, ApplicationState } from "@/store/ApplicationModule";
-import { ServiceDateModule, ServiceDateState } from "@/store/ServiceDate";
+import { ServiceModule, ServiceState } from "@/store/ServiceModule";
+import { AccessoryModule, AccessoryState } from "@/store/AccessoryModule";
 
 export interface RootState {
   map: MapState;
   application: ApplicationState;
-  serviceDate: ServiceDateState;
+  service: ServiceState;
+  accessory: AccessoryState;
 }
 
 export const store = createStore<RootState>({
   modules: {
     map: MapModule,
     application: ApplicationModule,
-    serviceDate: ServiceDateModule,
+    service: ServiceModule,
+    accessory: AccessoryModule,
   },
 });

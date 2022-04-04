@@ -49,7 +49,7 @@ import InputMain from "@/components/UI/InputMain";
 import SelectMain from "@/components/UI/SelectMain";
 import ButtonMain from "@/components/UI/ButtonMain";
 import IconColor from "@/components/UI/IconColor";
-import { defineEmits, defineProps, computed, ref, watch } from "vue";
+import { defineEmits, defineProps, computed, ref } from "vue";
 import { useStore } from "vuex";
 import { Option } from "@/models/UI/Props";
 const store = useStore();
@@ -73,7 +73,7 @@ for (let i = 1; i < 100; i++) {
 }
 const options = ref<Option[]>(opt);
 const accessories: Accessory[] = computed(
-  () => store.state.serviceDate.accessories
+  () => store.state.accessory.accessories
 );
 const emit = defineEmits(["hide"]);
 defineProps({
@@ -99,7 +99,7 @@ const Save = () => {
     current.accessories && current.accessories.length > 0
       ? current.accessories[current.accessories.length - 1].id + 1
       : 0;
-  store.commit("addApplicationAccessory", {
+  store.commit("addAccessory", {
     id: id,
     name: name.value,
     image: image.value,

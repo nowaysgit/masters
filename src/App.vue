@@ -20,6 +20,7 @@ import {
 
 //FOR TEST
 import { useStore } from "vuex";
+import { Event, Send } from "@/network";
 const store = useStore();
 store.commit("updateServices", [
   {
@@ -54,30 +55,11 @@ store.dispatch("takeApplication", {
   description:
     "Не работает видеокарта. Майнилась, в\u00A0один момент перестала определяться виндой. Не разбиралаcь.",
   services: [1, 2],
-  accessories: [
-    {
-      id: 1,
-      name: "Материнская плата GIGABYTE B660M DS3H DDR4 — 1\u00A0шт.",
-      image: "mater.png",
-      price: 16499,
-      status: true,
-    },
-    {
-      id: 2,
-      name: "Процессор Intel i9-12900K — 1\u00A0шт.",
-      image: "proz.png",
-      price: 132999,
-      status: false,
-    },
-    {
-      id: 3,
-      name: "Термопаста Arctic Cooling MX-4 (2019) — 1\u00A0шт.",
-      image: "",
-      price: 1169,
-      status: false,
-    },
-  ],
+  accessories: [1, 2, 3],
 });
+
+Send(Event.getServices);
+Send(Event.getApplication, 1);
 </script>
 
 <style lang="scss">

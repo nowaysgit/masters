@@ -55,5 +55,5 @@ export interface Application {
   price: number;
   description: string;
   services: number[];
-  accessories: Accessory[];
+  accessories: number[];
 }

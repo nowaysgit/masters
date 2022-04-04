@@ -2,11 +2,11 @@ import { Module } from "vuex";
 import { RootState } from "@/store";
 import { Service, ServiceCategory } from "@/models/Application";
 
-export interface ServiceDateState {
+export interface ServiceState {
   services: Service[];
 }
 
-export const ServiceDateModule: Module<ServiceDateState, RootState> = {
+export const ServiceModule: Module<ServiceState, RootState> = {
   state: {
     services: [
       {
@@ -24,7 +24,7 @@ export const ServiceDateModule: Module<ServiceDateState, RootState> = {
     ],
   },
   mutations: {
-    updateServices(state: ServiceDateState, services: Service[]) {
+    updateServices(state: ServiceState, services: Service[]) {
       state.services = services;
     },
   },

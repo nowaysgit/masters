@@ -93,7 +93,7 @@ const categoryShowed = ref(false);
 const categoryCurrent = ref();
 const store = useStore();
 
-const services: number[] = computed(() => store.state.serviceDate.services);
+const services: number[] = computed(() => store.state.service.services);
 const application: Application = computed(
   () => store.state.application.current
 );

@@ -104,7 +104,7 @@
         </DropdownMenu>
         <DropdownMenu name="Комплектующие">
           <AccessoryTab
-            v-for="accessory in application.accessories"
+            v-for="accessory in accessories"
             :key="accessory.id"
             :text="accessory.name"
             :price="accessory.price"
@@ -217,7 +217,8 @@ const store = useStore();
 const servicesShowed = ref(false);
 const accessoriesShowed = ref(false);
 const map: Map = computed(() => store.state.map);
-const services: number[] = computed(() => store.state.serviceDate.services);
+const services: number[] = computed(() => store.state.service.services);
+const accessories: number[] = computed(() => store.state.accessory.accessories);
 const application: Application = computed(
   () => store.state.application.current
 );

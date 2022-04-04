@@ -20,8 +20,8 @@ export const ApplicationModule: Module<ApplicationState, RootState> = {
     updateApplicationServices(state: ApplicationState, services: number[]) {
       if (state.current) state.current.services = services;
     },
-    addApplicationAccessory(state: ApplicationState, accessory: Accessory) {
-      if (state.current) state.current.accessories.push(accessory);
+    addApplicationAccessory(state: ApplicationState, id: number) {
+      if (state.current) state.current.accessories.push(id);
     },
   },
   actions: {
