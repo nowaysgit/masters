@@ -106,6 +106,7 @@ const Save = () => {
     price: Number(price.value),
     status: image.value !== "",
   });
+  store.commit("addApplicationAccessory", id);
   image.value = "";
   name.value = "";
   price.value = "";

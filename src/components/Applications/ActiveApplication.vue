@@ -104,7 +104,9 @@
         </DropdownMenu>
         <DropdownMenu name="Комплектующие">
           <AccessoryTab
-            v-for="accessory in accessories"
+            v-for="accessory in accessories.filter((x) =>
+              application.accessories.includes(x.id)
+            )"
             :key="accessory.id"
             :text="accessory.name"
             :price="accessory.price"
@@ -209,7 +211,12 @@ import AddService from "@/components/Applications/AddService";
 import AddAccessories from "@/components/Applications/AddAccessories";
 import { numberFormat } from "@/units";
 import { ColorClass, Font, ColorRgba } from "@/models/UI/Enums";
-import { Application, ExecutionStatus } from "@/models/Application";
+import {
+  Accessory,
+  Application,
+  ExecutionStatus,
+  Service,
+} from "@/models/Application";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 const store = useStore();
@@ -217,8 +224,10 @@ const store = useStore();
 const servicesShowed = ref(false);
 const accessoriesShowed = ref(false);
 const map: Map = computed(() => store.state.map);
-const services: number[] = computed(() => store.state.service.services);
-const accessories: number[] = computed(() => store.state.accessory.accessories);
+const services: Service[] = computed(() => store.state.service.services);
+const accessories: Accessory[] = computed(
+  () => store.state.accessory.accessories
+);
 const application: Application = computed(
   () => store.state.application.current
 );

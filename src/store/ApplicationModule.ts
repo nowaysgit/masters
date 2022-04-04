@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { Accessory, Application, ExecutionStatus } from "@/models/Application";
+import { Application, ExecutionStatus } from "@/models/Application";
 import { RootState } from "@/store/index";
 
 export interface ApplicationState {

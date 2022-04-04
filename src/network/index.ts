@@ -38,14 +38,15 @@ export enum Event {
   getApplication = "getApplication",
 }
 
-export const Send = (event: Event, message: string) => {
-  waitForConnection(function () {
-    socket.send(
+export const Send = async (event: Event, message: string) => {
+  waitForConnection(async function () {
+    await socket.send(
       JSON.stringify({
         event: event,
         message: message,
       })
     );
+    return true;
   }, 1000);
 };
 export const waitForConnection = (callback, interval) => {
@@ -74,16 +75,23 @@ class Functions {
   }
   async getServices(message: any) {
     const services = message as Service[];
-    await store.dispatch("updateServices", services);
+    await store.commit("updateServices", services);
     console.log(services);
   }
   async getAccessory(message: any) {
     const accessory = message as Accessory;
+    await store.commit("addAccessory", accessory);
     console.log(accessory);
   }
   async getApplication(message: any) {
     const application = message as Application;
     await store.dispatch("takeApplication", application);
+
+    if (store.state.application.current) {
+      for (const accessoryId of store.state.application.current.accessories) {
+        await Send(Event.getAccessory, accessoryId.toString());
+      }
+    }
     console.log(application);
   }
 }
