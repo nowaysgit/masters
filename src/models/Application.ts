@@ -52,6 +52,8 @@ export interface Application {
   addressRefined: string;
   coords: number[] | string;
   client: Client;
+  clientId: number;
+  userId: number;
   price: number;
   description: string;
   services: number[];
