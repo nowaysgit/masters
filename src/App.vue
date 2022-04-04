@@ -24,7 +24,7 @@ import { Event, Send } from "@/network";
 const store = useStore();
 
 Send(Event.getServices);
-Send(Event.getApplication, 1);
+Send(Event.getUser);
 </script>
 
 <style lang="scss">

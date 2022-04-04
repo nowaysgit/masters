@@ -3,4 +3,6 @@ export interface User {
   name: string;
   surName: string;
   balance: number;
+  currentApplicationId: number;
+  lastApplicationId: number;
 }

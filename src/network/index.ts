@@ -14,6 +14,7 @@ export interface Data {
 
 socket.onmessage = function (message) {
   const data = JSON.parse(message.data.toString()) as Data;
+  console.log(data);
   functions.run(data.event, data.message);
 };
 
@@ -36,14 +37,25 @@ export enum Event {
   getServices = "getServices",
   getAccessory = "getAccessory",
   getApplication = "getApplication",
+  getAvailable = "getAvailable",
+  takeApplication = "takeApplication",
+  startApplication = "startApplication",
+  completeApplication = "completeApplication",
+  canselApplication = "canselApplication",
+  takenApplication = "takenApplication",
+  newApplication = "newApplication",
 }
 
-export const Send = async (event: Event, message: string) => {
+export const Send = async (event: Event, message: any) => {
   waitForConnection(async function () {
     await socket.send(
       JSON.stringify({
         event: event,
-        message: message,
+        message: {
+          userId:
+            store.state.user.user !== null ? store.state.user.user?.id : 1,
+          data: message,
+        },
       })
     );
     return true;
@@ -65,34 +77,42 @@ class Functions {
       this[name](param);
     }
   }
-  async getUser(message: any) {
-    const user = message as User;
-    console.log(user);
+
+  //Get data methods
+  async getUser(user: User) {
+    if (user.currentApplicationId && user.currentApplicationId !== 0) {
+      await Send(Event.getApplication, user.currentApplicationId);
+    }
   }
-  async getClient(message: any) {
-    const client = message as Client;
+  async getClient(client: Client) {
     console.log(client);
   }
-  async getServices(message: any) {
-    const services = message as Service[];
-    await store.commit("updateServices", services);
-    console.log(services);
+  async getServices(servicies: Service[]) {
+    store.commit("updateServices", servicies);
   }
-  async getAccessory(message: any) {
-    const accessory = message as Accessory;
-    await store.commit("addAccessory", accessory);
-    console.log(accessory);
+  async getAccessory(accessory: Accessory) {
+    store.commit("addAccessory", accessory);
   }
-  async getApplication(message: any) {
-    const application = message as Application;
-    await store.dispatch("takeApplication", application);
+  async getApplication(application: Application) {
+    store.commit("updateCurrent", application);
+    await store.dispatch("startTimer");
 
-    if (store.state.application.current) {
-      for (const accessoryId of store.state.application.current.accessories) {
+    if (application) {
+      for (const accessoryId of application.accessories) {
         await Send(Event.getAccessory, accessoryId.toString());
       }
     }
-    console.log(application);
+  }
+  async getAvailable(applications: Application[]) {
+    store.commit("updateAvailable", applications);
+  }
+
+  //Application status change methods
+  async newApplication(id: number) {
+    store.commit("addAvailable", id);
+  }
+  async takenApplication(id: number) {
+    store.commit("removeAvailable", id);
   }
 }
 
